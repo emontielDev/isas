@@ -1,0 +1,181 @@
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*Theme Colors*/
+
+
+/*bootstrap Color*/
+
+
+/*Light colors*/
+
+
+/*Normal Color*/
+
+
+/*Extra Variable*/
+
+
+/*******************
+/*Top bar
+*******************/
+
+.topbar {
+    background: #002147;
+}
+
+.topbar .navbar-header {
+    background: #002147;
+}
+
+.topbar .top-navbar .navbar-header .navbar-brand .light-logo {
+    display: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link {
+    color: #ffffff !important;
+}
+
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link:hover,
+.topbar .navbar-light .navbar-nav .nav-item>a.nav-link:focus {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+
+/*******************
+/*General Elements
+*******************/
+
+.lstick {
+    background: #002147;
+}
+
+a.link:hover,
+a.link:focus {
+    color: #002147 !important;
+}
+
+.bg-theme {
+    background-color: #002147 !important;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    background-color: #002147;
+    border-color: #002147;
+}
+
+.right-sidebar .rpanel-title {
+    background: #002147;
+}
+
+.stylish-table tbody tr:hover,
+.stylish-table tbody tr.active {
+    border-left: 4px solid #002147;
+}
+
+.text-themecolor {
+    color: #002147 !important;
+}
+
+.profile-tab li a.nav-link.active,
+.customtab li a.nav-link.active {
+    border-bottom: 2px solid #002147;
+    color: #002147;
+}
+
+.profile-tab li a.nav-link:hover,
+.customtab li a.nav-link:hover {
+    color: #002147;
+}
+
+
+/*******************
+/*Buttons
+*******************/
+
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
+    background: #9b0c22;
+    color: #ffffff;
+    border: 1px solid #de9221;
+}
+
+.btn-primary:hover,
+.btn-primary.disabled:hover {
+    background: #9b0c22;
+    opacity: 0.7;
+    border: 1px solid #de9221;
+}
+
+.btn-primary.active,
+.btn-primary:focus,
+.btn-primary.disabled.active,
+.btn-primary.disabled:focus {
+    background: #720919;
+}
+
+
+/*******************
+/*sidebar navigation
+*******************/
+
+.label-themecolor {
+    background: #9b0c22;
+}
+
+.sidebar-nav>ul>li.active>a {
+    color: #de9221;
+    border-color: #002147;
+}
+
+.sidebar-nav>ul>li.active>a i {
+    color: #de9221;
+}
+
+.sidebar-nav ul li a.active,
+.sidebar-nav ul li a:hover {
+    color: #de9221;
+}
+
+.sidebar-nav ul li a.active i,
+.sidebar-nav ul li a:hover i {
+    color: #de9221;
+}
+
+.sidebar-nav>ul>li>a i {
+    color: #a6b7bf;
+}
+
+
+/*******************
+/* Dropdown
+*******************/
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #9b0c22;
+}
+
+.bg-theme-secondary {
+    background-color: #9b0c22;
+}

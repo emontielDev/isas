@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <button type="button" class="btn btn-secondary" (click)="add()"><i class="mdi mdi-book"></i> Nueva
+                        Materia</button>
+                </div>
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" class="display nowrap table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Curricular</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="materias?.length != 0">
+                            <tr *ngFor="let person of materias">
+                                <td>{{ person.id }}</td>
+                                <td>{{ person.nombre }}</td>
+                                <td>
+                                    <span class="badge badge-info" *ngIf="person.curricular">SI</span>
+                                    <span class="badge badge-warning" *ngIf="!person.curricular">SI</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="materias?.length == 0">
+                            <tr>
+                                <td colspan="3" class="no-data-available">No data!</td>
+                            </tr>
+                            <tbody>
+                    </table>
+                    <!-- <table datatable class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0001231</td>
+                                <td>Matematicas</td>
+                                <td class="text-nowrap text-center">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>0001231</td>
+                                <td>Historia</td>
+                                <td class="text-nowrap text-center">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>0001231</td>
+                                <td>Especialidad</td>
+                                <td class="text-nowrap text-center">
+                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                </div>
+            </div>
+        </div>
+    </div>-

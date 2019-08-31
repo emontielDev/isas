@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 id="dialog-name" class="modal-title pull-left"><em class="icon-envelope-open mr-1"></em> Registrar nueva materia
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frmMateria" class="form-horizontal">
+        <div class="form-group">
+            <label class="form-control-label">Clave:</label>
+            <input type="text" class="form-control" formControlName="clave" placeholder="Ingrese la clave de la materia." maxlength="10">
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group" [ngClass]="{'has-danger': frmMateria.controls['nombre'].invalid && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched), '': frmMateria.controls['nombre'].valid}">
+            <label for="message-text" class="form-control-label">Nombre materia:</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre de la materia." maxlength="30" [ngClass]="{'form-control-danger': frmMateria.controls['nombre'].invalid && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched), '': frmMateria.controls['nombre'].valid}">
+            <div class="form-control-feedback" *ngIf="frmMateria.controls['nombre'].hasError('required') && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched)">
+                El nombre de la materia es requerido.</div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-info" [disabled]="!frmMateria.dirty || frmMateria.invalid">
+        Guardar
+    </button>
+</div>

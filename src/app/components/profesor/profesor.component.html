@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h4 id="dialog-name" class="modal-title pull-left"><em class="icon-envelope-open mr-1"></em> Registrar nuevo profesor
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frmProfesor" class="form-horizontal">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['nombre'].invalid && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched), '': frmProfesor.controls['nombre'].valid}">
+                    <label for="message-text" class="form-control-label">Nombre: <span class="text-danger"
+                            *ngIf="frmProfesor.controls['nombre'].invalid">*</span></label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre de la materia." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['nombre'].invalid && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched), '': frmProfesor.controls['nombre'].valid}">
+                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['nombre'].hasError('required') && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched)">
+                        El nombre es requerido.</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['apaterno'].invalid && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched), '': frmProfesor.controls['apaterno'].valid}">
+                    <label for="message-text" class="form-control-label">Apellido paterno: <span class="text-danger"
+                            *ngIf="frmProfesor.controls['apaterno'].invalid">*</span></label>
+                    <input type="text" class="form-control" formControlName="apaterno" placeholder="Ingrese el apellido paterno del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['apaterno'].invalid && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched), '': frmProfesor.controls['apaterno'].valid}">
+                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['apaterno'].hasError('required') && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched)">
+                        El apellido paterno es requerido.</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['amaterno'].invalid && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched), '': frmProfesor.controls['amaterno'].valid}">
+                    <label for="message-text" class="form-control-label">Apellido materno: <span class="text-danger"
+                            *ngIf="frmProfesor.controls['amaterno'].invalid">*</span></label>
+                    <input type="text" class="form-control" formControlName="amaterno" placeholder="Ingrese el apellido materno del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['amaterno'].invalid && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched), '': frmProfesor.controls['amaterno'].valid}">
+                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['amaterno'].hasError('required') && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched)">
+                        El apellido materno es requerido.</div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['correoelectronico'].invalid && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched), '': frmProfesor.controls['correoelectronico'].valid}">
+                    <label for="message-text" class="form-control-label">Correo electrónico: <span class="text-danger"
+                            *ngIf="frmProfesor.controls['correoelectronico'].invalid">*</span></label>
+                    <input type="text" class="form-control" formControlName="correoelectronico" placeholder="Ingrese el correo electrónico del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['correoelectronico'].invalid && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched), '': frmProfesor.controls['correoelectronico'].valid}">
+                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['correoelectronico'].hasError('required') && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched)">
+                        El correo electrónico es requerido.</div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['fechanacimiento'].invalid && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched), '': frmProfesor.controls['fechanacimiento'].valid}">
+                    <label for="message-text" class="form-control-label">Fecha nacimiento: <span class="text-danger"
+                            *ngIf="frmProfesor.controls['fechanacimiento'].invalid">*</span></label>
+                    <input type="text" class="form-control" formControlName="fechanacimiento" placeholder="Ingrese la fecha de nacimiento del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['fechanacimiento'].invalid && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched), '': frmProfesor.controls['fechanacimiento'].valid}">
+                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['fechanacimiento'].hasError('required') && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched)">
+                        La fecha de nacimiento es requerida.</div>
+                </div>
+            </div>
+            <div class="col-lg-6 form-group">
+                <label class="form-control-label">&nbsp;</label>
+                <div class="controls">
+                    <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" value="H" />
+                    <label for="rdHombre">Hombre</label>
+                    <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" value="M" />
+                    <label for="rdMujer">Mujer</label>
+                    <span *ngIf="frmProfesor.controls['sexo'].invalid" class="text-danger">*</span>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="form-control-label">Clave:</label>
+            <input type="text" class="form-control" formControlName="clave" placeholder="Ingrese la clave de la materia." maxlength="10">
+        </div> -->
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-info">
+        Guardar
+    </button>
+</div>

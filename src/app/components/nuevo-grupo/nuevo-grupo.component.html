@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h4 id="dialog-name" class="modal-title pull-left"><i class="fa fa-users"></i> Nuevo Grupo</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frmGrupo" class="form-horizontal" (ngSubmit)="submit()">
+        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[esValido('nombre')]">
+            <label class="form-control-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre o clave para el grupo." maxlength="10">
+            <div class="form-control-feedback" *ngIf="frmGrupo.controls['nombre'].hasError('required') && (frmGrupo.controls['nombre'].dirty || frmGrupo.controls['nombre'].touched)">
+                El nombre del grupo es requerido.</div>
+        </div>
+        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[esValido('grado')]">
+            <label class="form-control-label">Grado</label>
+            <select class="form-control" formControlName="grado">
+                <option value="">-- Selecciona el grado --</option>
+                <optgroup label="Primaria">
+                    <option value="1">Primero</option>
+                    <option value="2">Segundo</option>
+                    <option value="3">Tercero</option>
+                    <option value="4">Cuarto</option>
+                    <option value="5">Quinto</option>
+                    <option value="6">Sexto</option>
+                </optgroup>
+                <optgroup label="Secundaria">
+                    <option value="7">Primero</option>
+                    <option value="8">Segundo</option>
+                    <option value="9">Tercero</option>
+                </optgroup>
+                <optgroup label="CCH">
+                    <option value="10">Primero</option>
+                    <option value="11">Segundo</option>
+                    <option value="12">Tercero</option>
+                </optgroup>
+                <optgroup label="Universidad">
+                    <option value="13">Primero</option>
+                    <option value="14">Segundo</option>
+                    <option value="15">Tercero</option>
+                </optgroup>
+            </select>
+            <div class="form-control-feedback" *ngIf="frmGrupo.controls['grado'].hasError('required') && (frmGrupo.controls['grado'].dirty || frmGrupo.controls['grado'].touched || submitted)">
+                El grado es requerido.</div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-info" (click)="submit()">
+        Guardar
+    </button>
+</div>

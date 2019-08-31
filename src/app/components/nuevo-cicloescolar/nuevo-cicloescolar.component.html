@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h4 id="dialog-name" class="modal-title pull-left"><em class="mdi mdi-plus mr-1"></em> Configuración</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <aw-wizard navBarLayout="large-empty-symbols" navBarLocation="left">
+        <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf64e;', fontFamily: 'Material Design Icons' }">
+            <form [formGroup]="frmCicloEscolar" class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="card-title">Datos generales del ciclo escolar</h3>
+                    <hr>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Indica el nombre del ciclo escolar" formControlName="nombre" maxlength="15">
+                            <div class="input-group-append ml-2">
+                                <button type="button" class="btn btn-primary" [disabled]="frmCicloEscolar.invalid" awNextStep>
+                                    Continuar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </aw-wizard-step>
+        <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf0c0;', fontFamily: 'FontAwesome' }">
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="card-title">Grupos
+                        <button type="button" class="btn btn-secondary btn-circle ml-2" tooltip="Añadir nuevo grupo" (click)="agregraGrupo();">
+                            <i class="mdi mdi-plus"></i>
+                        </button>
+                    </h3>
+                    <hr>
+                    <button type="button" class="btn btn-primary" awNextStep>Continuar</button>
+                </div>
+            </div>
+        </aw-wizard-step>
+        <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf222;', fontFamily: 'Material Design Icons' }">
+            <div class="centered-content">
+                Completion step content
+            </div>
+        </aw-wizard-step>
+    </aw-wizard>
+    <div>
+    </div>
+</div>
+<div class="modal-footer" *ngIf="false">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-info">
+        Guardar
+    </button>
+</div>
