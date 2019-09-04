@@ -25,4 +25,18 @@ export class SidebarComponent implements OnInit {
     this.sidebarService.cargarMenu();
   }
 
+  toggleHideSubMenu() {
+    // const url = window.location;
+    // let element = $('ul#sidebarnav a').filter(() => {
+    //   return this.href('href') !== url;
+    // }).removeClass('active').parent().removeClass('active');
+    // while (true) {
+    //   if (element.is('li')) {
+    //     element = element.parent().removeClass('in').parent().removeClass('active');
+    //   } else {
+    //     break;
+    //   }
+    // }
+  }
+
 }

@@ -10,6 +10,26 @@ export class SidebarService {
   cargarMenu() {
     this.menu = [
       {
+        titulo: 'Alumno',
+        icono: 'mdi mdi-account-card-details',
+        submenu: [
+          { titulo: 'Mis calificaciones', url: '/mis-calificaciones' }
+        ]
+      },
+      {
+        titulo: 'Control Escolar',
+        header: true
+      },
+      {
+        titulo: 'Catalogos',
+        icono: 'mdi mdi-settings',
+        submenu: [
+          { titulo: 'Alumnos', url: '/alumnos' },
+          { titulo: 'Materias', url: '/materias' },
+          { titulo: 'Profesores', url: '/profesores' }
+        ]
+      },
+      {
         titulo: 'Principal',
         icono: 'mdi mdi-gauge',
         submenu: [
@@ -19,20 +39,6 @@ export class SidebarService {
           // { titulo: 'Promesas', url: '/promesas' },
           // { titulo: 'Rxjs', url: '/rxjs' },
         ]
-      },
-      {
-        titulo: 'Mantenimientos',
-        icono: 'mdi mdi-folder-lock-open',
-        submenu: [
-          { titulo: 'Usuarios', url: '/usuarios' },
-          { titulo: 'Medicos', url: '/medicos' },
-          { titulo: 'Hospitales', url: '/hospitales' },
-        ]
-      },
-      {
-        titulo: 'Materias',
-        icono: 'mdi mdi-library-books',
-        url: '/materias'
       }
     ];
   }

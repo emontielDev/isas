@@ -4,6 +4,14 @@ import { CustomValidators } from 'ng2-validation';
 import { WebcamImage } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 
+// Models
+import { CrearAlumno } from '../../models/alumno.model';
+import { RespuestaApi } from '../../models/respuestamodel';
+
+// Services
+import { AlumnoService } from '../../services/alumno/alumno.service';
+
+
 @Component({
   selector: 'app-alumno',
   templateUrl: './alumno.component.html',
@@ -20,6 +28,7 @@ export class AlumnoComponent implements OnInit {
   // webcamImage: WebcamImage = null;
 
   constructor(
+    private alumnoService: AlumnoService,
     private formBuilder: FormBuilder,
   ) { }
   invokeEvent(place: object) {
@@ -40,13 +49,13 @@ export class AlumnoComponent implements OnInit {
     this.frmDatosPersonales = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       apaterno: ['', [Validators.required]],
-      amaterno: ['', [Validators.required]],
-      fechanacimiento: [null, [Validators.required]],
-      lugarnacimiento: [''],
+      amaterno: [''],
+      fechaNacimiento: [null, [Validators.required]],
+      lugarNacimiento: [''],
       nacionalidad: ['', [Validators.required]],
       curp: ['', [Validators.required]],
-      correoelectronico: ['', [CustomValidators.email]],
-      sexo: ['', [Validators.required]],
+      correoElectronico: ['', [CustomValidators.email]],
+      sexo: [null, [Validators.required]],
       domicilio: this.formBuilder.group({
         calle: ['', [Validators.required]],
         numeroExterior: ['', [Validators.required]],
@@ -74,38 +83,14 @@ export class AlumnoComponent implements OnInit {
         apaterno: ['', [Validators.required]],
         amaterno: [''],
         telefono: [''],
-        correoelectronico: ['', [CustomValidators.email]],
-        domicilio: this.formBuilder.group({
-          calle: ['', [Validators.required]],
-          numeroExterior: ['', [Validators.required]],
-          numeroInterior: [''],
-          codigoPostal: ['', [Validators.required]],
-          colonia: ['', [Validators.required]],
-          delegacion: ['', [Validators.required]],
-          estado: ['', [Validators.required]],
-        }),
-        empresa: [''],
-        puesto: [''],
-        telefonoTrabajo: ['']
+        correoElectronico: ['', [CustomValidators.email]]
       }),
       papa: this.formBuilder.group({
         nombre: ['', [Validators.required]],
         apaterno: ['', [Validators.required]],
         amaterno: [''],
         telefono: [''],
-        correoelectronico: ['', [CustomValidators.email]],
-        domicilio: this.formBuilder.group({
-          calle: ['', [Validators.required]],
-          numeroExterior: ['', [Validators.required]],
-          numeroInterior: [''],
-          codigoPostal: ['', [Validators.required]],
-          colonia: ['', [Validators.required]],
-          delegacion: ['', [Validators.required]],
-          estado: ['', [Validators.required]],
-        }),
-        empresa: [''],
-        puesto: [''],
-        telefonoTrabajo: ['']
+        correoElectronico: ['', [CustomValidators.email]]
       })
     });
 
@@ -160,6 +145,21 @@ export class AlumnoComponent implements OnInit {
 
   save(): void {
     this.submitted = true;
+
+    if (this.frmDatosPersonales.invalid) {
+      return;
+    }
+
+    let form = Object.assign({});
+    form = Object.assign(form, this.frmDatosPersonales.value);
+    const entity = form as CrearAlumno;
+
+    console.log(entity);
+
+    this.alumnoService.crear(entity)
+      .subscribe((res: RespuestaApi) => {
+        console.log(res);
+      });
   }
 
   // public get triggerObservable(): Observable<void> {

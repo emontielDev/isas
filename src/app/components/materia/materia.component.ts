@@ -1,9 +1,15 @@
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Sweet Alert
 import swal from 'sweetalert';
+
+// Models
+import { Materia } from '../../models/material.model';
+
+// Services
+import { MateriaService } from 'src/app/services/services.index';
 
 @Component({
   selector: 'app-materia',
@@ -12,12 +18,23 @@ import swal from 'sweetalert';
 })
 export class MateriaComponent implements OnInit {
 
+  public onSuccess: EventEmitter<Materia> = new EventEmitter();
+
+
   frmMateria: FormGroup;
+  submitted = false;
 
   constructor(
+    private materiaService: MateriaService,
     private bsModalRef: BsModalRef,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+    this.frmMateria = this.formBuilder.group({
+      clave: [''],
+      nombre: ['', [Validators.required]],
+      curricular: [null, [Validators.required]]
+    });
+  }
 
   hide(): void {
     if (this.frmMateria.dirty) {
@@ -41,10 +58,38 @@ export class MateriaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.frmMateria = this.formBuilder.group({
-      clave: [''],
-      nombre: ['', [Validators.required]]
-    });
   }
 
+  guardar() {
+    if (this.frmMateria.invalid) {
+      return;
+    }
+
+    let o = Object.assign({});
+    o = Object.assign(o, this.frmMateria.value);
+
+    this.materiaService.guardar(o as Materia)
+      .subscribe((materia: Materia) => {
+        console.log(materia);
+        this.bsModalRef.hide();
+        this.onSuccess.emit(materia);
+      });
+
+  }
+
+  mostrarMensajeError(form: FormGroup, name: string, type: string) {
+    const input = form.controls[name];
+    return ((input.touched || input.dirty) || this.submitted) && input.hasError(type);
+  }
+
+  validarControl(form: FormGroup, name: string): string {
+    const input = form.controls[name];
+    if (input.invalid && ((input.touched || input.dirty) || this.submitted)) {
+      return '1'; // is invalid
+    } else if (input.valid && input.validator != null) {
+      return '0'; // is valid
+    } else {
+      return '2'; // not is required
+    }
+  }
 }

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 // Routes
 import { APP_ROUTES } from './app.routes';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     APP_ROUTES,
     BrowserAnimationsModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

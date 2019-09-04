@@ -19,15 +19,24 @@
                     </ul>
                 </li>
                 <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
-                <li *ngFor="let menu of sidebarService.menu">
-                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span
-                            class="hide-menu">{{menu.titulo}}
+                <!-- <li class="nav-small-cap">PERSONAL</li> -->
+                <li *ngFor="let menu of sidebarService.menu" [ngClass]="{'nav-small-cap': menu.header}">
+                    <!-- menu heading -->
+                    <span *ngIf="menu.header" class="text-uppercase">{{ menu.titulo }}</span>
+
+                    <!-- single menu item -->
+                    <a href *ngIf="!menu.header && !menu.submenu" [routerLink]="menu.url" title="{{menu.titulo}}" [routerLinkActive]="['active']" (click)="toggleHideSubMenu();">
+                        <i class="{{menu.icono}}" *ngIf="menu.icono"></i>
+                        <span class="hide-menu">{{menu.titulo}}</span>
+                    </a>
+
+                    <!-- has submenu -->
+                    <a *ngIf="!menu.header && menu.submenu" class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu">{{menu.titulo}}
                             <span *ngIf="menu.submenu"
                                 class="label label-rouded label-themecolor pull-right">{{menu.submenu.length}}</span></span></a>
                     <ul aria-expanded="false" class="collapse" *ngIf="menu.submenu">
                         <li *ngFor="let submenu of menu.submenu">
-                            <a routerLinkActive="active" [routerLink]="[submenu.url]">{{submenu.titulo}}
+                            <a routerLinkActive="active" [routerLink]="[submenu.url]" (click)="toggleHideSubMenu();">{{submenu.titulo}}
                             </a>
                         </li>
                     </ul>

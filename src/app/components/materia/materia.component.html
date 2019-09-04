@@ -6,19 +6,28 @@
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="frmMateria" class="form-horizontal">
-        <div class="form-group">
-            <label class="form-control-label">Clave:</label>
-            <input type="text" class="form-control" formControlName="clave" placeholder="Ingrese la clave de la materia." maxlength="10">
+    <form [formGroup]="frmMateria" class="form-horizontal" (submit)="guardar();">
+        <div class="form-body">
+            <div class="form-group">
+                <label class="form-control-label">Clave:</label>
+                <input type="text" class="form-control" formControlName="clave" placeholder="Ingrese la clave." maxlength="15">
+            </div>
         </div>
-        <div class="form-group">
-
+        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmMateria, 'nombre')]">
+            <label class="form-control-label">Nombre materia <span class="text-danger"
+                    *ngIf="frmMateria.controls['nombre'].invalid">*</span></label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre." maxlength="40" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmMateria, 'nombre')]">
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmMateria, 'nombre', 'required')">
+                El nombre de la materia es requerido.
+            </small>
         </div>
-        <div class="form-group" [ngClass]="{'has-danger': frmMateria.controls['nombre'].invalid && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched), '': frmMateria.controls['nombre'].valid}">
-            <label for="message-text" class="form-control-label">Nombre materia:</label>
-            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre de la materia." maxlength="30" [ngClass]="{'form-control-danger': frmMateria.controls['nombre'].invalid && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched), '': frmMateria.controls['nombre'].valid}">
-            <div class="form-control-feedback" *ngIf="frmMateria.controls['nombre'].hasError('required') && (frmMateria.controls['nombre'].dirty || frmMateria.controls['nombre'].touched)">
-                El nombre de la materia es requerido.</div>
+        <label class="form-control-label">Es curricular <span class="text-danger"
+                *ngIf="frmMateria.controls['curricular'].invalid">*</span></label>
+        <div class="controls">
+            <input id="rdSi" name="curricular" formControlName="curricular" class="radio-col-light-blue mr-2 with-gap" [formControl]="frmMateria.controls['curricular']" type="radio" value="true" />
+            <label for="rdSi">SI</label>
+            <input id="rdNo" name="curricular" formControlName="curricular" class="radio-col-light-blue with-gap" [formControl]="frmMateria.controls['curricular']" type="radio" value="false" />
+            <label for="rdNo">NO</label>
         </div>
     </form>
 </div>
@@ -26,7 +35,7 @@
     <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
         Cancelar
     </button>
-    <button type="button" class="btn btn-info" [disabled]="!frmMateria.dirty || frmMateria.invalid">
+    <button type="button" class="btn btn-primary" [disabled]="!frmMateria.dirty || frmMateria.invalid" (click)="guardar();">
         Guardar
     </button>
 </div>

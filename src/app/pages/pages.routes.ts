@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 
 import { AlumnoComponent } from './alumno/alumno.component';
+import { AlumnosComponent } from './alumnos/alumnos.component';
 import { HomeComponent } from './home/home.component';
 import { MateriasComponent } from './materias/materias.component';
 import { ProfesoresComponent } from './profesores/profesores.component';
@@ -30,7 +31,14 @@ export const routes: Route[] = [
                 }
             },
             {
-                path: 'alumno',
+                path: 'alumnos',
+                component: AlumnosComponent,
+                data: {
+                    title: 'Catalogos de Alumnos'
+                }
+            },
+            {
+                path: 'alumno/ficha-inscripcion',
                 component: AlumnoComponent,
                 data: {
                     title: 'Ficha de inscripción nuevo aspirante'

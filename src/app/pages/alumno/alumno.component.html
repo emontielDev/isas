@@ -53,9 +53,9 @@
                                     <label class="form-control-label">Sexo <span class="text-danger"
                                             *ngIf="frmDatosPersonales.controls['sexo'].invalid">*</span></label>
                                     <div class="controls">
-                                        <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue mr-2 with-gap" [formControl]="frmDatosPersonales.controls['sexo']" type="radio" value="H" />
+                                        <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue mr-2 with-gap" [formControl]="frmDatosPersonales.controls['sexo']" type="radio" value="true" />
                                         <label for="rdHombre">Hombre</label>
-                                        <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmDatosPersonales.controls['sexo']" type="radio" value="M" />
+                                        <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmDatosPersonales.controls['sexo']" type="radio" value="false" />
                                         <label for="rdMujer">Mujer</label>
                                     </div>
                                 </div>
@@ -67,11 +67,11 @@
                 <!-- Seccion 2 -->
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales, 'fechanacimiento')]">
+                        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales, 'fechaNacimiento')]">
                             <label class="form-control-label">Fecha de Nacimiento <span class="text-danger"
-                                    *ngIf="frmDatosPersonales.controls['fechanacimiento'].invalid">*</span></label>
-                            <input type="text" class="form-control text-uppercase" placeholder="Indique la fecha de nacimiento." formControlName="fechanacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales, 'fechanacimiento')]">
-                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'fechanacimiento', 'required')">
+                                    *ngIf="frmDatosPersonales.controls['fechaNacimiento'].invalid">*</span></label>
+                            <input type="text" class="form-control text-uppercase" placeholder="Indique la fecha de nacimiento." formControlName="fechaNacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales, 'fechaNacimiento')]">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'fechaNacimiento', 'required')">
                                 La fecha de nacimiento es requerida.
                             </small>
                         </div>
@@ -79,7 +79,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="form-group">
                             <label class="form-control-label">Lugar de Nacimiento</label>
-                            <input type="text" class="form-control text-uppercase" placeholder="Indique el apellido materno." formControlName="lugarnacimiento">
+                            <input type="text" class="form-control text-uppercase" placeholder="Indique el apellido materno." formControlName="lugarNacimiento">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -103,10 +103,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales, 'correoelectronico', 'email')]">
+                        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales, 'correoElectronico', 'email')]">
                             <label class="form-control-label">Correo electrónico</label>
-                            <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoelectronico">
-                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'correoelectronico', 'email')">
+                            <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoElectronico">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'correoElectronico', 'email')">
                                 No cumple con la estructura de un correo electrónico.
                             </small>
                         </div>
@@ -156,7 +156,7 @@
                         <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales.controls['domicilio'], 'colonia')]">
                             <label class="form-control-label">Colonia <span class="text-danger"
                                     *ngIf="frmDatosPersonales.controls['domicilio'].controls['colonia'].invalid">*</span></label>
-                            <input type="text" class="form-control text-uppercase" placeholder="Indique la colonnia." formControlName="colonia" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales.controls['domicilio'], 'colonia')]">
+                            <input type="text" class="form-control text-uppercase" placeholder="Indique la colonia." formControlName="colonia" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales.controls['domicilio'], 'colonia')]">
                             <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['domicilio'], 'colonia', 'required')">
                                 La colonia es requerida.
                             </small>
@@ -351,20 +351,70 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label">Telefono</label>
-                                                    <input type="text" class="form-control text-uppercase" placeholder="Indique el tlefono." formControlName="telefono">
+                                                    <input type="text" class="form-control text-uppercase" placeholder="Indique el teléfono." formControlName="telefono">
                                                 </div>
                                             </div>
                                     <div class="col-12">
-                                        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoelectronico', 'email')]">
+                                        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoElectronico', 'email')]">
                                             <label class="form-control-label">Correo electrónico</label>
-                                            <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoelectronico" [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoelectronico', 'email')]">
-                                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoelectronico', 'email')">
+                                            <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoElectronico" [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoElectronico', 'email')]">
+                                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoElectronico', 'email')">
                                                 No cumple con la estructura de un correo electrónico.
                                             </small>
                                         </div>
                                     </div>
                                 </div>
                         </div>
+                        <div class="col-6">
+                            <h3 class="box-title m-t-10"><i class="mdi mdi-human-male mdi-18px "></i> Datos del papá </h3>
+                            <hr>
+                            <div class="row" formGroupName="papa">
+                                <div class="col-12 text-center">
+                                    <img class="img-circle img-responsive m-auto" src="../../../assets/images/icon/no-image-male.png" style="width: 140px !important; height: 140px !important;">
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales.controls['papa'], 'nombre')]">
+                                        <label class="form-control-label">Nombre(s) <span class="text-danger"
+                                                *ngIf="frmDatosPersonales.controls['papa'].controls['nombre'].invalid">*</span></label>
+                                        <input type="text" class="form-control text-uppercase" placeholder="Indique el/los nombres." formControlName="nombre" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales.controls['papa'], 'nombre')]">
+                                        <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['papa'], 'nombre', 'required')">
+                                            El nombre es requerido.
+                                        </small>
+                                    </div>
+                                </div>
+                                        <div class="col-12">
+                                            <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales.controls['papa'], 'apaterno')]">
+                                                <label class="form-control-label">Apellido paterno <span class="text-danger"
+                                                        *ngIf="frmDatosPersonales.controls['papa'].controls['apaterno'].invalid">*</span></label>
+                                                <input type="text" class="form-control text-uppercase" placeholder="Indique el apellido paterno." formControlName="apaterno" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales.controls['papa'], 'apaterno')]">
+                                                <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['papa'], 'apaterno', 'required')">
+                                                    El apellido paterno es requerido.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Apellido materno</label>
+                                                <input type="text" class="form-control text-uppercase" placeholder="Indique el apellido materno." formControlName="amaterno">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Telefono</label>
+                                                <input type="text" class="form-control text-uppercase" placeholder="Indique el teléfono." formControlName="telefono">
+                                            </div>
+                                        </div>
+                                <div class="col-12">
+                                    <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales.controls['papa'], 'correoElectronico', 'email')]">
+                                        <label class="form-control-label">Correo electrónico</label>
+                                        <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoElectronico" [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[mostrarMensajeError(frmDatosPersonales.controls['papa'], 'correoElectronico', 'email')]">
+                                        <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['papa'], 'correoElectronico', 'email')">
+                                            No cumple con la estructura de un correo electrónico.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
                     </div>
                 </div>
                 

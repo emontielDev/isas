@@ -15,6 +15,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 // Components
 import { AlumnoComponent } from './alumno/alumno.component';
+import { AlumnosComponent } from './alumnos/alumnos.component';
 import { HomeComponent } from './home/home.component';
 import { MateriaComponent } from '../components/materia/materia.component'; // Entry components
 import { MateriasComponent } from './materias/materias.component';
@@ -27,7 +28,6 @@ import { ProfesoresComponent } from './profesores/profesores.component';
 // Modules
 import { LayoutModule } from '../layout/layout.module';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
 // Routes
 import { routes } from './pages.routes';
@@ -36,6 +36,7 @@ import { routes } from './pages.routes';
 @NgModule({
   declarations: [
     AlumnoComponent,
+    AlumnosComponent,
     HomeComponent,
     MateriaComponent,
     MateriasComponent,
@@ -43,7 +44,7 @@ import { routes } from './pages.routes';
     NuevoGrupoComponent,
     PagesComponent,
     ProfesorComponent,
-    ProfesoresComponent,
+    ProfesoresComponent
   ],
   entryComponents: [
     MateriaComponent,
@@ -57,7 +58,6 @@ import { routes } from './pages.routes';
     BsDatepickerModule.forRoot(),
     CommonModule,
     DataTablesModule,
-    HttpClientModule,
     LayoutModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
