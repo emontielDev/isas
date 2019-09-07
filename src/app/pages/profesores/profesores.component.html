@@ -1,69 +1,90 @@
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <button type="button" class="btn btn-secondary" (click)="add()"><i
-                            class="mdi mdi-account-multiple-plus"></i> Nuevo
-                        Profesor</button>
+
+<div class="card">
+    <div class="card-header bg-theme">
+        <h3 class="card-title text-white"><i class="mdi mdi-18px mdi-library"></i> Informacion de Profesores
+            </h3>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="frmDatosProfesores">
+            <div class="form-body">
+                <!-- Seccion 1 -->
+                <div class="row p-t-20">
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+                        <img class="img-circle img-responsive m-auto" src="../../../assets/images/icon/no-image.png" style="width: 160px !important; height: 160px !important;">
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosProfesores, 'nombre')]">
+                                    <label class="form-control-label">Nombre(s) <span class="text-danger"
+                                            *ngIf="frmDatosProfesores.controls['nombre'].invalid">*</span></label>
+                                    <input type="text" class="form-control text-uppercase" placeholder="Nombres." formControlName="nombre" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosProfesores, 'nombre')]">
+                                    <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosProfesores, 'nombre', 'required')">
+                                        El nombre es requerido.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosProfesores, 'apaterno')]">
+                                    <label class="form-control-label">Apellido paterno <span class="text-danger"
+                                            *ngIf="frmDatosProfesores.controls['apaterno'].invalid">*</span></label>
+                                    <input type="text" class="form-control text-uppercase" placeholder="Apellido Paterno." formControlName="apaterno" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosProfesores, 'apaterno')]">
+                                    <!--<small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosProfesores, 'apaterno', 'required')">
+                                        El apellido paterno es requerido.
+                                    </small>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Apellido materno</label>
+                                    <input type="text" class="form-control text-uppercase" placeholder="Apellido Materno." formControlName="amaterno">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Sexo <span class="text-danger"
+                                            *ngIf="frmDatosProfesores.controls['sexo'].invalid">*</span></label>
+                                    <div class="controls">
+                                        <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue mr-2 with-gap" [formControl]="frmDatosProfesores.controls['sexo']" type="radio" value="H" />
+                                        <label for="rdHombre">Hombre</label>
+                                        <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmDatosProfesores.controls['sexo']" type="radio" value="M" />
+                                        <label for="rdMujer">Mujer</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table datatable class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Clave</th>
-                                <th>Nombre</th>
-                                <th>Correo electrónico</th>
-                                <th>Fecha nacimiento</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0001231</td>
-                                <td>
-                                    <a href="javascript:void(0)">
-                                        <img src="./assets/images/users/1.jpg" alt="user" width="40" class="img-circle"> Felipe Calderon Hinojosa
-                                    </a>
-                                </td>
-                                <td>profesor1@iass.edu.mx</td>
-                                <td class="text-right">22 Mar 1976</td>
-                                <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0001231</td>
-                                <td>
-                                    <a href="javascript:void(0)">
-                                        <img src="./assets/images/users/2.jpg" alt="user" width="40" class="img-circle"> Raúl Zuñiga Magaña
-                                    </a>
-                                </td>
-                                <td>profesor2@iass.edu.mx</td>
-                                <td class="text-right">11 Abr 1987</td>
-                                <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>0001231</td>
-                                <td>
-                                    <a href="javascript:void(0)">
-                                        <img src="./assets/images/users/4.jpg" alt="user" width="40" class="img-circle"> Rosalia Sanchez Medrano
-                                    </a>
-                                </td>
-                                <td>profesor1@iass.edu.mx</td>
-                                <td class="text-right">22 Mar 1976</td>
-                                <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- Seccion 2 -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosProfesores, 'fechanacimiento')]">
+                            <label class="form-control-label">Fecha de Nacimiento <span class="text-danger"
+                                    *ngIf="frmDatosProfesores.controls['fechanacimiento'].invalid">*</span></label>
+                            <input type="text" class="form-control text-uppercase" placeholder="Fecha Nacimiento" formControlName="fechanacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosProfesores, 'fechanacimiento')]">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosProfesores, 'fechanacimiento', 'required')">
+                                La fecha de nacimiento es requerida.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosProfesores, 'correoelectronico', 'email')]">
+                            <label class="form-control-label">Correo electrónico</label>
+                            <input type="text" class="form-control text-lowercase" placeholder="Correo Electronico." formControlName="correoelectronico">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosProfesores, 'correoelectronico', 'email')">
+                                No cumple con la estructura de un correo electrónico.
+                            </small>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                              
+            <div class="card-footer">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" (click)="save()">
+                <!--[disabled]="frmDatosProfesores.invalid"-->
+                Registrar
+            </button>
         </div>
-    </div>-
+    </div>
+</div>
