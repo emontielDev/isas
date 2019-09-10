@@ -15,7 +15,11 @@ export class MateriaService {
     private httpClient: HttpClient,
   ) { }
 
+  obtener(): Observable<Materia[]> {
+    return this.httpClient.get<Materia[]>('/api/materia');
+  }
+
   guardar(materia: Materia): Observable<Materia> {
-    return this.httpClient.post<Materia>('/api/materia/crear', materia);
+    return this.httpClient.post<Materia>('/api/materia', materia);
   }
 }

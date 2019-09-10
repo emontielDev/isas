@@ -1,5 +1,16 @@
 import { Domicilio } from './common.model';
 
+export class Alumno {
+    constructor(
+        public id: number,
+        public nombre: string,
+        public apaterno: string,
+        public avatar: string,
+        public amaterno?: string,
+        public curp?: string
+    ) { }
+}
+
 export class CrearAlumno {
     constructor(
         public nombre: string,

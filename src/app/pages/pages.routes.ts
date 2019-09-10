@@ -34,7 +34,7 @@ export const routes: Route[] = [
                 path: 'alumnos',
                 component: AlumnosComponent,
                 data: {
-                    title: 'Catalogos de Alumnos'
+                    title: 'Listado de Alumnos'
                 }
             },
             {
