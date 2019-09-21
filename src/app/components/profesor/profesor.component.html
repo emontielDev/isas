@@ -1,80 +1,99 @@
 <div class="modal-header">
-    <h4 id="dialog-name" class="modal-title pull-left"><em class="icon-envelope-open mr-1"></em> Registrar nuevo profesor
+    <h4 class="modal-title pull-left"><em class="mdi mr-1" [ngClass]="{'mdi-account-edit': profesor, 'mdi-account-plus': !profesor}"></em> {{ profesor ? 'Editar profesor ' + (profesor.nombre + ' ' + profesor.apaterno + ' ' + (profesor?.amaterno || '')).trim() : 'Registrar nuevo profesor'
+        }}
     </h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <form [formGroup]="frmProfesor" class="form-horizontal">
+    <form [formGroup]="frmProfesor" (ngSubmit)="save()">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['nombre'].invalid && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched), '': frmProfesor.controls['nombre'].valid}">
-                    <label for="message-text" class="form-control-label">Nombre: <span class="text-danger"
-                            *ngIf="frmProfesor.controls['nombre'].invalid">*</span></label>
-                    <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre de la materia." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['nombre'].invalid && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched), '': frmProfesor.controls['nombre'].valid}">
-                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['nombre'].hasError('required') && (frmProfesor.controls['nombre'].dirty || frmProfesor.controls['nombre'].touched)">
-                        El nombre es requerido.</div>
-                </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+                <app-avatar formControlName="avatar" tipo="profesor" [usuario]="profesor" [mostrarEdicion]="false">
+                </app-avatar>
             </div>
-            <div class="col-lg-6">
-                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['apaterno'].invalid && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched), '': frmProfesor.controls['apaterno'].valid}">
-                    <label for="message-text" class="form-control-label">Apellido paterno: <span class="text-danger"
-                            *ngIf="frmProfesor.controls['apaterno'].invalid">*</span></label>
-                    <input type="text" class="form-control" formControlName="apaterno" placeholder="Ingrese el apellido paterno del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['apaterno'].invalid && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched), '': frmProfesor.controls['apaterno'].valid}">
-                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['apaterno'].hasError('required') && (frmProfesor.controls['apaterno'].dirty || frmProfesor.controls['apaterno'].touched)">
-                        El apellido paterno es requerido.</div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['amaterno'].invalid && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched), '': frmProfesor.controls['amaterno'].valid}">
-                    <label for="message-text" class="form-control-label">Apellido materno: <span class="text-danger"
-                            *ngIf="frmProfesor.controls['amaterno'].invalid">*</span></label>
-                    <input type="text" class="form-control" formControlName="amaterno" placeholder="Ingrese el apellido materno del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['amaterno'].invalid && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched), '': frmProfesor.controls['amaterno'].valid}">
-                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['amaterno'].hasError('required') && (frmProfesor.controls['amaterno'].dirty || frmProfesor.controls['amaterno'].touched)">
-                        El apellido materno es requerido.</div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['correoelectronico'].invalid && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched), '': frmProfesor.controls['correoelectronico'].valid}">
-                    <label for="message-text" class="form-control-label">Correo electrónico: <span class="text-danger"
-                            *ngIf="frmProfesor.controls['correoelectronico'].invalid">*</span></label>
-                    <input type="text" class="form-control" formControlName="correoelectronico" placeholder="Ingrese el correo electrónico del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['correoelectronico'].invalid && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched), '': frmProfesor.controls['correoelectronico'].valid}">
-                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['correoelectronico'].hasError('required') && (frmProfesor.controls['correoelectronico'].dirty || frmProfesor.controls['correoelectronico'].touched)">
-                        El correo electrónico es requerido.</div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group" [ngClass]="{'has-danger': frmProfesor.controls['fechanacimiento'].invalid && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched), '': frmProfesor.controls['fechanacimiento'].valid}">
-                    <label for="message-text" class="form-control-label">Fecha nacimiento: <span class="text-danger"
-                            *ngIf="frmProfesor.controls['fechanacimiento'].invalid">*</span></label>
-                    <input type="text" class="form-control" formControlName="fechanacimiento" placeholder="Ingrese la fecha de nacimiento del profesor." maxlength="30" [ngClass]="{'form-control-danger': frmProfesor.controls['fechanacimiento'].invalid && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched), '': frmProfesor.controls['fechanacimiento'].valid}">
-                    <div class="form-control-feedback" *ngIf="frmProfesor.controls['fechanacimiento'].hasError('required') && (frmProfesor.controls['fechanacimiento'].dirty || frmProfesor.controls['fechanacimiento'].touched)">
-                        La fecha de nacimiento es requerida.</div>
-                </div>
-            </div>
-            <div class="col-lg-6 form-group">
-                <label class="form-control-label">&nbsp;</label>
-                <div class="controls">
-                    <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" value="H" />
-                    <label for="rdHombre">Hombre</label>
-                    <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" value="M" />
-                    <label for="rdMujer">Mujer</label>
-                    <span *ngIf="frmProfesor.controls['sexo'].invalid" class="text-danger">*</span>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmProfesor, 'nombre')]">
+                            <label class="form-control-label">Nombre(s) <span class="text-danger"
+                                    *ngIf="frmProfesor.controls['nombre'].invalid">*</span></label>
+                            <input type="text" class="form-control text-uppercase" placeholder="Nombres" formControlName="nombre" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmProfesor, 'nombre')]">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmProfesor, 'nombre', 'required')">
+                                El nombre es requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmProfesor, 'apaterno')]">
+                            <label class="form-control-label">Apellido paterno <span class="text-danger"
+                                    *ngIf="frmProfesor.controls['apaterno'].invalid">*</span></label>
+                            <input type="text" class="form-control text-uppercase" placeholder="Apellido Paterno" formControlName="apaterno" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmProfesor, 'apaterno')]">
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmProfesor, 'apaterno', 'required')">
+                                El apellido paterno es requerido.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="form-control-label">Apellido materno</label>
+                            <input type="text" class="form-control text-uppercase" placeholder="Apellido Materno" formControlName="amaterno">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="form-group">
-            <label class="form-control-label">Clave:</label>
-            <input type="text" class="form-control" formControlName="clave" placeholder="Ingrese la clave de la materia." maxlength="10">
-        </div> -->
+        <div class="row mt-2">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmProfesor, 'fechaNacimiento')]">
+                    <label class="form-control-label">Fecha de Nacimiento <span class="text-danger"
+                            *ngIf="frmProfesor.controls['fechaNacimiento'].invalid">*</span></label>
+                    <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }" class="form-control text-uppercase" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmProfesor, 'fechaNacimiento')]">
+                    <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmProfesor, 'fechaNacimiento', 'required')">
+                        La fecha de nacimiento es requerida.
+                    </small>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmProfesor, 'sexo')]">
+                    <label class="form-control-label">Sexo <span class="text-danger"
+                            *ngIf="frmProfesor.controls['sexo'].invalid">*</span></label>
+                    <div class="controls">
+                        <input id="rdHombre" name="sexo" formControlName="sexo" class="radio-col-light-blue mr-2 with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" [value]="true" />
+                        <label for="rdHombre">Hombre</label>
+                        <input id="rdMujer" name="sexo" formControlName="sexo" class="radio-col-light-blue with-gap" [formControl]="frmProfesor.controls['sexo']" type="radio" [value]="false" />
+                        <label for="rdMujer">Mujer</label>
+                    </div>
+                    <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmProfesor, 'sexo', 'required')">
+                        Indique el sexo del docente.
+                    </small>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmProfesor, 'correoElectronico', 'email')]">
+                    <label class="form-control-label">Correo electrónico</label>
+                    <input type="text" class="form-control text-lowercase" placeholder="Correo electrónico" formControlName="correoElectronico">
+                    <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmProfesor, 'correoElectronico', 'email')">
+                        No cumple con la estructura de un correo electrónico.
+                    </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <small class="text-info">
+                    <strong>NOTA:</strong> Si se especifica la cuenta de correo electrónico enviaremos sus datos de
+                    acceso a su bandeja de
+                    entrada.
+                </small>
+            </div>
+        </div>
     </form>
 </div>
-<div class="modal-footer">
+<div class="modal-footer card-footer">
     <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
         Cancelar
     </button>
-    <button type="button" class="btn btn-info">
+    <button type="button" class="btn btn-primary" (click)="save();">
         Guardar
     </button>
 </div>

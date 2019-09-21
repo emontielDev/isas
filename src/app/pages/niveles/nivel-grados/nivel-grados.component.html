@@ -1,0 +1,28 @@
+<form [formGroup]="frmBusquedaGrado" class="form-horizontal" (ngSubmit)="buscar()">
+    <div class="row p-t-20">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="criterio" placeholder="Criterios de búsqueda...">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group has-danger">
+                <button type="submit" class="btn btn-primary">
+                    Buscar
+                </button>
+                <button type="button" class="btn btn-secondary float-right" (click)="agregar()"><i
+                        class="mdi mdi-plus-circle-outline"></i> Nuevo Grado </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-body">
+        <ul class="list-group">
+            <li *ngFor="let grado of grados" class="list-group-item">{{ grado.nombre }}
+                <a href="javascript:void(0)" (click)="editar(grado);"> <i class="fa fa-pencil text-inverse float-right"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>

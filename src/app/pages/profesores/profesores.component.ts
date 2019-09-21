@@ -1,91 +1,95 @@
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
-import { WebcamImage } from 'ngx-webcam';
-import { Subject, Observable } from 'rxjs';
-
-
 
 // Component
+import { AvatarComponent } from '../../components/avatar/avatar.component';
 import { ProfesorComponent } from '../../components/profesor/profesor.component';
+
+// Models
+import { Usuario } from '../../models/usuario.model';
+
+// Sweet Alert
+import swal from 'sweetalert';
+
+// Service
+import { ProfesorService } from '../../services/services.index';
 
 @Component({
   selector: 'app-profesores',
   templateUrl: './profesores.component.html',
   styleUrls: ['./profesores.component.css']
 })
-/*export class ProfesoresComponent implements OnInit {
-
-  bsModalRef: BsModalRef;
-
-  constructor(
-    private modalService: BsModalService
-  ) { }
-
-  ngOnInit() {
-  }
-
-  add(): void {
-    this.bsModalRef = this.modalService.show(ProfesorComponent,
-      { ignoreBackdropClick: true, keyboard: false, class: 'modal-lg' });
-  }
-
-}*/
 
 export class ProfesoresComponent implements OnInit {
-  frmDatosProfesores: FormGroup;
-  // trigger: Subject<void> = new Subject<void>();
-  submitted = false;
-  // videoOptions: MediaTrackConstraints = {
-  //   width: { ideal: 1024 },
-  //   height: { ideal: 576 }
-  // };
-  // webcamImage: WebcamImage = null;
+
+  bsModalRef: BsModalRef;
+  frmBusquedaProfesores: FormGroup;
+  profesores: Usuario[];
+
   constructor(
     private formBuilder: FormBuilder,
+    private modalService: BsModalService,
+    private profesorService: ProfesorService
   ) { }
-  invokeEvent(place: object) {
-    console.log(place);
+
+  actualizarAvatar(data: any, profesor: Usuario) {
+    const nombreCompleto = `${profesor.nombre} ${profesor.apaterno} ${profesor.amaterno || ''}`.trim();
+    swal({
+      title: '¿Está seguro?',
+      text: `Esta a punto de actualizar la imagen de: ${nombreCompleto}`,
+      icon: 'info',
+      buttons: ['Cancelar', 'Aceptar'],
+      dangerMode: true,
+    })
+      .then(actualizar => {
+        if (actualizar) {
+          this.profesorService.actualizarAvatar(profesor.id, data.avatar)
+            .subscribe((res: Usuario) => {
+              swal('Actualización exitosa', `La imagen del profesor fue actualizada.`, 'success');
+              this.buscar();
+            });
+        } else {
+          data.instancia.limpiarTemporal();
+        }
+      });
+    return;
   }
 
-  mostrarMensajeError(form: FormGroup, name: string, type: string) {
-    const input = form.controls[name];
-    return ((input.touched || input.dirty) || this.submitted) && input.hasError(type);
-  }
+  agregar(): void {
+    this.bsModalRef = this.modalService.show(ProfesorComponent,
+      { ignoreBackdropClick: true, keyboard: false, class: 'modal-lg' });
 
-
-ngOnInit() {
-  this.frmDatosProfesores = this.formBuilder.group ({
-    nombre: ['', [Validators.required]],
-    apaterno: ['', [Validators.required]],
-    amaterno: ['', [Validators.required]],
-    fechanacimiento: [null, [Validators.required]],
-    correoelectronico: ['', [CustomValidators.email]],
-    sexo: ['', [Validators.required]],
+    this.bsModalRef.content.exitoso.subscribe((profesor: Usuario) => {
+      const nombreCompleto = `${profesor.nombre} ${profesor.apaterno} ${profesor.amaterno || ''}`.trim();
+      swal('Alta exitosa', `El profesor '${nombreCompleto}' fue registrado con exito.`, 'success');
+      this.frmBusquedaProfesores.controls.criterio.setValue('');
+      this.buscar();
     });
   }
-  save(): void {
-    this.submitted = true;
+
+  buscar() {
+    this.profesorService.obtener(this.frmBusquedaProfesores.controls.criterio.value || '')
+      .subscribe(data => this.profesores = data);
   }
 
-  // public get triggerObservable(): Observable<void> {
-  //   return this.trigger.asObservable();
-  // }
+  editarProfesor(profesor: Usuario) {
+    console.log(profesor);
+    this.bsModalRef = this.modalService.show(ProfesorComponent,
+      { ignoreBackdropClick: true, initialState: { profesor }, keyboard: false, class: 'modal-lg' });
 
-  // triggerSnapshot(): void {
-  //   this.trigger.next();
-  // }
+    this.bsModalRef.content.exitoso.subscribe((profesorEditado: Usuario) => {
+      const nombreCompleto = `${profesorEditado.nombre} ${profesorEditado.apaterno} ${profesorEditado.amaterno || ''}`.trim();
+      swal('Actualización exitosa', `El profesor '${nombreCompleto}' fue actualizado con exito.`, 'success');
+      this.buscar();
+    });
+  }
 
-  validarControl(form: FormGroup, name: string): number {
-    const input = form.controls[name];
-    if (input.invalid && ((input.touched || input.dirty) || this.submitted)) {
-      return 1; // is invalid
-    } else if (input.valid && input.validator != null) {
-      return 0; // is valid
-    } else {
-      return 2; // not is required
-    }
-    // return ((input.touched || input.dirty) || this.submitted) && input.invalid;
+  ngOnInit() {
+    this.frmBusquedaProfesores = this.formBuilder.group({
+      criterio: ['']
+    });
+
+    this.buscar();
   }
 }

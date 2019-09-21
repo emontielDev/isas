@@ -22,18 +22,23 @@ export class SidebarService {
       },
       {
         titulo: 'Catalogos',
-        icono: 'mdi mdi-settings',
+        icono: 'mdi mdi-layers',
         submenu: [
           { titulo: 'Alumnos', url: '/alumnos' },
           { titulo: 'Materias', url: '/materias' },
-          { titulo: 'Profesores', url: '/profesores' }
+          { titulo: 'Niveles', url: '/niveles' },
+          { titulo: 'Profesores', url: '/profesores' },
         ]
       },
       {
-        titulo: 'Principal',
-        icono: 'mdi mdi-gauge',
+        titulo: 'Administrador',
+        header: true
+      },
+      {
+        titulo: 'Configuración',
+        icono: 'mdi mdi-settings',
         submenu: [
-          { titulo: 'Inicio', url: '/home' },
+          { titulo: 'Ciclo Escolar', url: '/ciclo-escolar' },
           // { titulo: 'Gráficas', url: '/graficas1' },
           // { titulo: 'Progress Bar', url: '/progress' },
           // { titulo: 'Promesas', url: '/promesas' },

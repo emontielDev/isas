@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left"><em class="mdi mr-1" [ngClass]="{'mdi-refresh': nivel, 'mdi-plus': !nivel}"></em> {{ nivel ? ('Editar Nivel ' + nivel.nombre).trim() : 'Registrar nuevo nivel' }}
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frmNivel" class="form-horizontal" (submit)="guardar();">
+        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmNivel, 'nombre')]">
+            <label class="form-control-label">Nombre <span class="text-danger"
+                    *ngIf="frmNivel.controls['nombre'].invalid">*</span></label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre del nivel." maxlength="15" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmNivel, 'nombre')]">
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmNivel, 'nombre', 'required')">
+                El nombre del nivel es requerido.
+            </small>
+        </div>
+        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmNivel, 'evaluaciones')]">
+            <label class="form-control-label">Número de Evaluaciones <span class="text-danger"
+                    *ngIf="frmNivel.controls['evaluaciones'].invalid">*</span></label>
+            <input type="number" class="form-control" formControlName="evaluaciones" placeholder="Ingrese las ervaluaciones." max="9" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmNivel, 'evaluaciones')]">
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmNivel, 'evaluaciones', 'required')">
+                El número de evaluaciones es requerido.
+            </small>
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmNivel, 'evaluaciones', 'min')">
+                El número de evaluaciones debe ser mayor o igual a
+                {{ frmNivel.controls['evaluaciones'].errors.min.min}}.
+            </small>
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmNivel, 'evaluaciones', 'max')">
+                El número de evaluaciones debe ser menor o igual a
+                {{ frmNivel.controls['evaluaciones'].errors.max.max}}.
+            </small>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" [disabled]="!frmNivel.dirty || frmNivel.invalid" (click)="guardar();">
+        {{ nivel ? 'Actualizar' : 'Guardar' }}
+    </button>
+</div>

@@ -17,9 +17,13 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { AlumnosComponent } from './alumnos/alumnos.component';
 import { AvatarComponent } from '../components/avatar/avatar.component';
+import { GradoComponent } from '../components/grado/grado.component';
 import { HomeComponent } from './home/home.component';
 import { MateriaComponent } from '../components/materia/materia.component'; // Entry components
 import { MateriasComponent } from './materias/materias.component';
+import { NivelComponent } from '../components/nivel/nivel.component'; // Entry components
+import { NivelGradosComponent } from './niveles/nivel-grados/nivel-grados.component';
+import { NivelesComponent } from './niveles/niveles.component';
 import { NuevoCicloescolarComponent } from '../components/nuevo-cicloescolar/nuevo-cicloescolar.component'; // Entry components
 import { NuevoGrupoComponent } from '../components/nuevo-grupo/nuevo-grupo.component'; // Entry components
 import { PagesComponent } from './pages.component';
@@ -40,9 +44,13 @@ import { routes } from './pages.routes';
     AlumnoComponent,
     AlumnosComponent,
     AvatarComponent,
+    GradoComponent,
     HomeComponent,
     MateriaComponent,
     MateriasComponent,
+    NivelComponent,
+    NivelGradosComponent,
+    NivelesComponent,
     NuevoCicloescolarComponent,
     NuevoGrupoComponent,
     PagesComponent,
@@ -50,7 +58,9 @@ import { routes } from './pages.routes';
     ProfesoresComponent
   ],
   entryComponents: [
+    GradoComponent,
     MateriaComponent,
+    NivelComponent,
     NuevoCicloescolarComponent,
     NuevoGrupoComponent,
     ProfesorComponent

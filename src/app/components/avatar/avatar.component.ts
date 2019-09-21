@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, OnDestroy, forwardRef, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Models
-import { Alumno } from '../../models/alumno.model';
+import { Usuario } from '../../models/usuario.model';
 
 // SweetAlert
 import swal from 'sweetalert';
@@ -9,29 +10,69 @@ import swal from 'sweetalert';
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.css']
+  styleUrls: ['./avatar.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AvatarComponent),
+      multi: true
+    }
+  ]
 })
-export class AvatarComponent implements OnInit {
+export class AvatarComponent implements OnInit, ControlValueAccessor, OnDestroy {
+
+  // Eventos
+  @Output() Editar: EventEmitter<Usuario> = new EventEmitter();
+  @Output() CambiarAvatar: EventEmitter<{ avatar: string, instancia: AvatarComponent }> = new EventEmitter();
 
   @ViewChild('file', { static: false }) flImagen: ElementRef;
 
   @Input() cssClass: string;
-  @Input() usuario: Alumno;
+  @Input() mostrarEdicion: boolean;
+  @Input() usuario: Usuario;
   @Input() titulo: string;
   @Input() tipo: string;
 
-  protected imgTemp: string;
+  protected imgTemporal: string;
+  protected deshabilitado: boolean;
+
+  onChange: (entity: string) => {};
+  onTouched: () => {};
+
+  get value(): string {
+    return this.imgTemporal;
+  }
+
+  set value(value: string) {
+    // this.imgTemporal = value;
+    this.onChange(value);
+    this.onTouched();
+  }
+
   constructor() { }
 
   cambiarAvatar() {
     this.flImagen.nativeElement.click();
   }
 
+  public limpiarTemporal() {
+    this.imgTemporal = null;
+  }
+
+  editar() {
+    this.Editar.emit(this.usuario);
+    // if (this.usuario) {
+    //   if (this.tipo) {
+    //     this.bsModalRef = this.modalService.show(ProfesorComponent,
+    //       { ignoreBackdropClick: true, initialState: { profesor }, keyboard: false, class: 'modal-lg' });
+    //   }
+    // }
+  }
+
   handlerCambiarAvatar(event: any) {
     const file = event.target.files[0] as File;
 
     if (!file) {
-      // this.imgTemp = null;
       return;
     }
 
@@ -42,13 +83,44 @@ export class AvatarComponent implements OnInit {
 
     const fileReader = new FileReader();
     fileReader.onload = (res: any) => {
-      this.imgTemp = res.target.result;
+      this.imgTemporal = res.target.result;
+      this.CambiarAvatar.emit({ avatar: this.imgTemporal, instancia: this });
+      if (this.onChange) {
+        this.onChange(this.imgTemporal);
+      }
     };
 
     fileReader.readAsDataURL(file);
   }
 
-  ngOnInit() {
+  ngOnDestroy(): void {
+    this.imgTemporal = null;
+    this.usuario = null;
   }
+
+  ngOnInit() {
+
+  }
+
+  //#region Reactive Forms
+  writeValue(imagen: string): void {
+    if (imagen) {
+      // this.imgTemporal = imagen;
+      this.onChange(imagen);
+    }
+    // else {
+    //   this.imgTemporal = null;
+    // }
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.deshabilitado = isDisabled;
+  }
+  //#endregion
 
 }

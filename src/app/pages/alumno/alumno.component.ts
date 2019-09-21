@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { WebcamImage } from 'ngx-webcam';
-import { Subject, Observable } from 'rxjs';
 
 // Models
-import { CrearAlumno } from '../../models/alumno.model';
-import { RespuestaApi } from '../../models/respuestamodel';
+import { CrearAlumno } from '../../models/usuario.model';
 
 // Services
 import { AlumnoService } from '../../services/alumno/alumno.service';
 
+// Lenguaje DatePicker
+import { defineLocale, esLocale } from 'ngx-bootstrap/chronos';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+defineLocale('es', esLocale);
+
+// Sweet Alert
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-alumno',
@@ -19,18 +23,15 @@ import { AlumnoService } from '../../services/alumno/alumno.service';
 })
 export class AlumnoComponent implements OnInit {
   frmDatosPersonales: FormGroup;
-  // trigger: Subject<void> = new Subject<void>();
   submitted = false;
-  // videoOptions: MediaTrackConstraints = {
-  //   width: { ideal: 1024 },
-  //   height: { ideal: 576 }
-  // };
-  // webcamImage: WebcamImage = null;
 
   constructor(
+    private localeService: BsLocaleService,
     private alumnoService: AlumnoService,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+    this.localeService.use('es');
+  }
   invokeEvent(place: object) {
     console.log(place);
   }
@@ -40,17 +41,13 @@ export class AlumnoComponent implements OnInit {
     return ((input.touched || input.dirty) || this.submitted) && input.hasError(type);
   }
 
-  // handleImage(webcamImage: WebcamImage): void {
-  //   console.log('received webcam image', webcamImage);
-  //   this.webcamImage = webcamImage;
-  // }
-
   ngOnInit() {
+    this.localeService.use('es');
     this.frmDatosPersonales = this.formBuilder.group({
       nombre: ['', [Validators.required]],
       apaterno: ['', [Validators.required]],
       amaterno: [''],
-      fechaNacimiento: [null, [Validators.required]],
+      fechaNacimiento: [null, [Validators.required, CustomValidators.date]],
       lugarNacimiento: [''],
       nacionalidad: ['', [Validators.required]],
       curp: ['', [Validators.required]],
@@ -83,14 +80,14 @@ export class AlumnoComponent implements OnInit {
         apaterno: ['', [Validators.required]],
         amaterno: [''],
         telefono: [''],
-        correoElectronico: ['', [CustomValidators.email]]
+        // correoElectronico: ['', [CustomValidators.email]]
       }),
       papa: this.formBuilder.group({
         nombre: ['', [Validators.required]],
         apaterno: ['', [Validators.required]],
         amaterno: [''],
         telefono: [''],
-        correoElectronico: ['', [CustomValidators.email]]
+        // correoElectronico: ['', [CustomValidators.email]]
       })
     });
 
@@ -154,21 +151,22 @@ export class AlumnoComponent implements OnInit {
     form = Object.assign(form, this.frmDatosPersonales.value);
     const entity = form as CrearAlumno;
 
-    console.log(entity);
-
     this.alumnoService.crear(entity)
-      .subscribe((res: RespuestaApi) => {
-        console.log(res);
+      .subscribe((res: any) => {
+        const nombre = `${res.nombre} ${res.apaterno} ${res.amaterno || ''}`.trim();
+        let mensaje = '';
+        if (res.correoElectronico) {
+          mensaje = `El alumno '${nombre}' se registro con exito, se envio un correo a la cuenta '${res.correoElectronico}'
+          con las credenciales de acceso al sistema.`;
+        } else {
+          mensaje = `El alumno '${nombre}' se registro con exito.`;
+        }
+
+        swal('Solicitud exitosa', mensaje, 'success');
+      }, (e) => {
+        swal('Error', e.error.mensaje, 'error');
       });
   }
-
-  // public get triggerObservable(): Observable<void> {
-  //   return this.trigger.asObservable();
-  // }
-
-  // triggerSnapshot(): void {
-  //   this.trigger.next();
-  // }
 
   validarControl(form: FormGroup, name: string): number {
     const input = form.controls[name];

@@ -1,7 +1,7 @@
 export class Nivel {
     constructor(
-        id: number,
-        nombre: string,
-        evaluaciones: number
+        public id: number,
+        public nombre: string,
+        public evaluaciones: number
     ) { }
 }

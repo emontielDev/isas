@@ -1,10 +1,10 @@
 <div class="overlay-1">
-    <img [src]="imgTemp || (usuario.avatar | avatar: 'usuario')" [alt]="usuario.nombre">
-    <input #file type="file" class="d-none" [name]="usuario.id" (change)="handlerCambiarAvatar($event)">
+    <img [src]="imgTemporal || usuario?.avatar | avatar: tipo" [alt]="usuario?.nombre">
+    <input #file type="file" class="d-none" [name]="usuario?.id" (change)="handlerCambiarAvatar($event)">
     <div class="overlay">
         <ul class="info">
-            <li>
-                <a class="btn default btn-outline btn-xs" href="javascript:void(0);" tooltip="Modificar información">
+            <li *ngIf="usuario && mostrarEdicion">
+                <a class="btn default btn-outline btn-xs" href="javascript:void(0);" tooltip="Modificar información" (click)="editar()">
                     <i class="mdi mdi-lead-pencil"></i>
                 </a>
             </li>

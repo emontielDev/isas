@@ -16,11 +16,15 @@
                     <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                 </b>
                 <!--End Logo icon -->
-                <!-- Logo text --><span>
+                <!-- Logo text -->
+                <span>
                     <!-- dark Logo text -->
                     <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                     <!-- Light Logo text -->
-                    <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                    <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                -->
+                </span>
+            </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -42,16 +46,16 @@
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-                <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
+                <!-- <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
                             class="ti-search"></i></a>
                     <div class="app-search">
                         <input #txtSearch (keyup.enter)="search(txtSearch.value)" type="text" class="form-control" placeholder="Buscar & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                     </div>
-                </li>
+                </li> -->
                 <!-- ============================================================== -->
                 <!-- Messages -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </a>
@@ -62,7 +66,6 @@
                             </li>
                             <li>
                                 <div class="message-center">
-                                    <!-- Message -->
                                     <a href="#">
                                         <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                         <div class="mail-contnet">
@@ -70,7 +73,6 @@
                                             <span class="time">9:30 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
                                     <a href="#">
                                         <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span>
                                         </div>
@@ -79,7 +81,6 @@
                                                 at</span> <span class="time">9:10 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
                                     <a href="#">
                                         <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span>
                                         </div>
@@ -87,7 +88,6 @@
                                             <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
                                     <a href="#">
                                         <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
                                         <div class="mail-contnet">
@@ -103,7 +103,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <!-- ============================================================== -->
                 <!-- End Messages -->
                 <!-- ============================================================== -->
@@ -145,34 +145,36 @@
                             </ul> -->
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link waves-effect waves-dark" [routerLink]="['/alumnos/ficha-inscripcion']" aria-haspopup="true" aria-expanded="false">
+                        <small><i class="mdi mdi-account-plus"></i> Nuevo Alumno</small>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link waves-effect waves-dark" href="javascript:void(0)" aria-haspopup="true" aria-expanded="false">
                         <small>Secundaria 1ro</small>
                     </a>
                     <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Invitations <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Next invitation batch</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Overview</li>
-                                    <li><a href="#">Past invitations</a></li>
-                                    <li><a href="#">Manage blacklist</a></li>
-                                </ul> -->
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Next invitation batch</a></li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">Overview</li>
+                                        <li><a href="#">Past invitations</a></li>
+                                        <li><a href="#">Manage blacklist</a></li>
+                                    </ul> -->
                 </li>
                 <!-- ============================================================== -->
                 <!-- Profile -->
                 <!-- ============================================================== -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/profile.png" alt="user" class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box text-center">
                                     <div class="u-img"><img src="assets/images/users/3.jpg" alt="user"></div>
-                                    <!-- [src]="usuario.img | imagen" -->
                                     <div class="u-text">
                                         <h4>Eder Montiel</h4>
-                                        <!--{{this.usuario.nombre}} -->
                                         <p class="text-muted">emontiel.argos@gmail.com</p><a routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a>
-                                        <!-- {{this.usuario.email}} -->
                                     </div>
                                 </div>
                             </li>
@@ -187,7 +189,7 @@
                                     sesion</a></li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>

@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left"><em class="mdi mr-1" [ngClass]="{'mdi-refresh': grado, 'mdi-plus': !grado}"></em> {{ grado ? ('Editar Grado ' + grado.nombre).trim() : 'Registrar nuevo grado' }}
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="frmGrado" class="form-horizontal" (submit)="guardar();">
+        <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmGrado, 'nombre')]">
+            <label class="form-control-label">Nombre <span class="text-danger"
+                    *ngIf="frmGrado.controls['nombre'].invalid">*</span></label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre del nivel." maxlength="15" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmGrado, 'nombre')]">
+            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmGrado, 'nombre', 'required')">
+                El nombre del nivel es requerido.
+            </small>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="hide()">
+        Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" [disabled]="!frmGrado.dirty || frmGrado.invalid" (click)="guardar();">
+        {{ grado ? 'Actualizar' : 'Guardar' }}
+    </button>
+</div>

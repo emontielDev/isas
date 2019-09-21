@@ -28,6 +28,8 @@
     transition: all 0.4s linear;
     width: 100%;
     height: auto;
+    min-height: 140px;
+    min-width: 140px;
 }
 
 .overlay-1:hover img {

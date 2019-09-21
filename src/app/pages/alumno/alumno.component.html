@@ -70,9 +70,12 @@
                         <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales, 'fechaNacimiento')]">
                             <label class="form-control-label">Fecha de Nacimiento <span class="text-danger"
                                     *ngIf="frmDatosPersonales.controls['fechaNacimiento'].invalid">*</span></label>
-                            <input type="text" class="form-control text-uppercase" placeholder="Indique la fecha de nacimiento." formControlName="fechaNacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales, 'fechaNacimiento')]">
+                            <input type="text" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' }" class="form-control text-uppercase" placeholder="Indique la fecha de nacimiento." formControlName="fechaNacimiento" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales, 'fechaNacimiento')]">
                             <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'fechaNacimiento', 'required')">
                                 La fecha de nacimiento es requerida.
+                            </small>
+                            <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales, 'fechaNacimiento', 'date')">
+                                El valor no corresponde a una fecha.
                             </small>
                         </div>
                     </div>
@@ -191,7 +194,7 @@
                         <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales.controls['adicionales'], 'estadoCivil')]">
                             <label class="form-control-label">Estado civil</label>
                             <select class="form-control" formControlName="estadoCivil">
-                                <option value="">NINGUNO</option>
+                                <option value>NINGUNO</option>
                                 <option value="CASADO">CASADO (A)</option>
                                 <option value="DIVORCIADO">DIVORCIADO (A)</option>
                                 <option value="SOLTERO">SOLTERO (A)</option>
@@ -255,7 +258,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="form-group" [ngClass]="{'2': '', '1': 'has-danger', '0': 'has-success'}[validarControl(frmDatosPersonales.controls['adicionales'], 'hmujeres')]">
-                                    <label class="form-control-label">Hombres <span class="text-danger"
+                                    <label class="form-control-label">Mujeres <span class="text-danger"
                                             *ngIf="frmDatosPersonales.controls['adicionales'].controls['hmujeres'].invalid">*</span></label>
                                     <input type="number" class="form-control text-uppercase" placeholder="Número de hermanas." formControlName="hmujeres" required [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[validarControl(frmDatosPersonales.controls['adicionales'], 'hmujeres')]">
                                     <small class="form-control-feedback" *ngIf="mostrarMensajeError(frmDatosPersonales.controls['adicionales'], 'hmujeres', 'required')">
@@ -354,7 +357,7 @@
                                                     <input type="text" class="form-control text-uppercase" placeholder="Indique el teléfono." formControlName="telefono">
                                                 </div>
                                             </div>
-                                    <div class="col-12">
+                                    <!-- <div class="col-12">
                                         <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoElectronico', 'email')]">
                                             <label class="form-control-label">Correo electrónico</label>
                                             <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoElectronico" [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[mostrarMensajeError(frmDatosPersonales.controls['mama'], 'correoElectronico', 'email')]">
@@ -362,7 +365,7 @@
                                                 No cumple con la estructura de un correo electrónico.
                                             </small>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                         </div>
                         <div class="col-6">
@@ -404,7 +407,7 @@
                                                 <input type="text" class="form-control text-uppercase" placeholder="Indique el teléfono." formControlName="telefono">
                                             </div>
                                         </div>
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="form-group" [ngClass]="{ false: '', true: 'has-danger'}[mostrarMensajeError(frmDatosPersonales.controls['papa'], 'correoElectronico', 'email')]">
                                         <label class="form-control-label">Correo electrónico</label>
                                         <input type="text" class="form-control text-lowercase" placeholder="Indique el correo electrónico." formControlName="correoElectronico" [ngClass]="{'2': '', '1': 'form-control-danger', '0': 'form-control-success'}[mostrarMensajeError(frmDatosPersonales.controls['papa'], 'correoElectronico', 'email')]">
@@ -412,7 +415,7 @@
                                             No cumple con la estructura de un correo electrónico.
                                         </small>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                     </div>
                     </div>

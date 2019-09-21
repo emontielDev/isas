@@ -5,19 +5,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AvatarPipe implements PipeTransform {
 
-  transform(img: string, tipo: string): any {
+  transform(avatar: string, tipo: string): any {
     let url = '/api/avatar/';
-    if (!img) {
+    // console.log('avatar', avatar);
+    // console.log('tipo', tipo);
+    if (!avatar) {
       return url;
     }
 
-    if (img.indexOf('https') >= 0) {
-      return img;
+    if (avatar.indexOf('https') >= 0 || avatar.indexOf('data:image/') >= 0) {
+      return avatar;
     }
 
     switch (tipo) {
-      case 'usuario':
-        url += 'usuarios/' + img;
+      case 'alumno':
+        url += 'alumnos/' + avatar;
+        break;
+      case 'profesor':
+        url += 'profesores/' + avatar;
         break;
       default:
         console.log(`El tipo ${tipo} no existe como colección.`);

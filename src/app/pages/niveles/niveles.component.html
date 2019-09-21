@@ -1,0 +1,31 @@
+<form [formGroup]="frmBusquedaNivel" class="form-horizontal" (ngSubmit)="buscar()">
+    <div class="row p-t-20">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="criterio" placeholder="Criterios de búsqueda...">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group has-danger">
+                <button type="submit" class="btn btn-primary">
+                    Buscar
+                </button>
+                <button type="button" class="btn btn-secondary float-right" (click)="agregar()"><i
+                        class="mdi mdi-plus-circle-outline"></i> Nuevo Nivel </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-body">
+        <div class="list-group">
+            <div *ngFor="let nivel of niveles" class="list-group-item">
+                <a href="javascript:void(0)" [routerLink]="[nivel.id]" [state]="{data: { title: 'hola'}}">{{ nivel.nombre }} - <small>Se aplican {{nivel.evaluaciones}}
+                        evaluaciones.</small>
+                </a>
+                <a href="javascript:void(0)" (click)="editar(nivel);"> <i class="fa fa-pencil text-inverse float-right"></i> </a>
+            </div>
+        </div>
+    </div>
+</div>
